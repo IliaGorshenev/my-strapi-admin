@@ -369,35 +369,10 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiCarCar extends Struct.CollectionTypeSchema {
-  collectionName: 'cars';
-  info: {
-    displayName: 'car';
-    pluralName: 'cars';
-    singularName: 'car';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::car.car'> &
-      Schema.Attribute.Private;
-    price: Schema.Attribute.Integer;
-    publishedAt: Schema.Attribute.DateTime;
-    title: Schema.Attribute.String;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
 export interface ApiUslugaUsluga extends Struct.CollectionTypeSchema {
   collectionName: 'uslugas';
   info: {
+    description: '';
     displayName: 'usluga';
     pluralName: 'uslugas';
     singularName: 'usluga';
@@ -406,22 +381,31 @@ export interface ApiUslugaUsluga extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    contraindications: Schema.Attribute.Blocks;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.Text;
+    effect_description: Schema.Attribute.Blocks;
     image: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios',
       true
     >;
+    indications: Schema.Attribute.Blocks;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::usluga.usluga'
     > &
       Schema.Attribute.Private;
-    price: Schema.Attribute.Decimal;
+    price_list: Schema.Attribute.Component<'services.price-list-item', true>;
+    primechanie: Schema.Attribute.Text;
+    procedure_details: Schema.Attribute.Component<
+      'services.procedure-details',
+      false
+    >;
     publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<'title'>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -938,7 +922,6 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
-      'api::car.car': ApiCarCar;
       'api::usluga.usluga': ApiUslugaUsluga;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

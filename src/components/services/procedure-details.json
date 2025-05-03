@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_services_procedure_details",
+  "info": {
+    "displayName": "ProcedureDetails",
+    "icon": "connector"
+  },
+  "options": {},
+  "attributes": {
+    "duration_summary": {
+      "type": "string"
+    },
+    "frequency": {
+      "type": "string"
+    },
+    "preparations_used": {
+      "type": "string"
+    },
+    "anesthesia_info": {
+      "type": "string"
+    },
+    "course_recommendation": {
+      "type": "string"
+    },
+    "effect_summary": {
+      "type": "string"
+    }
+  }
+}

@@ -4,7 +4,8 @@
   "info": {
     "singularName": "usluga",
     "pluralName": "uslugas",
-    "displayName": "usluga"
+    "displayName": "usluga",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -17,18 +18,42 @@
     "description": {
       "type": "text"
     },
-    "price": {
-      "type": "decimal"
-    },
     "image": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
+    },
+    "price_list": {
+      "type": "component",
+      "repeatable": true,
+      "component": "services.price-list-item"
+    },
+    "indications": {
+      "type": "blocks"
+    },
+    "effect_description": {
+      "type": "blocks"
+    },
+    "contraindications": {
+      "type": "blocks"
+    },
+    "procedure_details": {
+      "type": "component",
+      "repeatable": false,
+      "component": "services.procedure-details"
+    },
+    "primechanie": {
+      "type": "text"
     }
   }
 }
